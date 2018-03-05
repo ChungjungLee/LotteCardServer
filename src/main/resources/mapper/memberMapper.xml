@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원정보 처리 SQL -->
+<mapper namespace="com.cjlee.lottecard.mapper.MemberMapper">
+
+	<!-- 회원 정보 저장 -->
+	<insert id="insertMember" parameterType="member">
+		insert into member (
+			id
+			,name
+			,telephone
+			,registeredDate
+			,registeredPlace
+			,issuedDate
+			,hasTmoney
+			,hasAutopay
+			,etcInfo
+		)
+		values (
+			lc_members_SEQ.nextval
+			,#{name}
+			,#{telephone}
+			,#{registeredDate}
+			,#{registeredPlace}
+			,#{issuedDate}
+			,#{hasTmoney}
+			,#{hasAutopay}
+			,#{etcInfo}
+		)
+	</insert>
+	
+	<select id="selectMember" resultType="member">
+		SELECT
+			*
+		FROM
+			lc_members
+		ORDER BY
+			registeredDate ASC
+	</select>
+	
+	<!-- 월별 회원 정보 -->
+	<select id="selectMemberByMonth" parameterType="int" resultType="member">
+		select
+			num
+			,name
+			,phone
+		from
+			member
+		order by
+			num
+	</select>	
+
+</mapper>
