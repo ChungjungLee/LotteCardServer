@@ -8,16 +8,15 @@
 
 	<!-- 회원 정보 저장 -->
 	<insert id="insertMember" parameterType="member">
-		insert into member (
+		insert into lc_members (
 			id
 			,name
 			,telephone
 			,registeredDate
 			,registeredPlace
-			,issuedDate
 			,hasTmoney
 			,hasAutopay
-			,etcInfo
+			
 		)
 		values (
 			lc_members_SEQ.nextval
@@ -25,16 +24,19 @@
 			,#{telephone}
 			,#{registeredDate}
 			,#{registeredPlace}
-			,#{issuedDate}
 			,#{hasTmoney}
 			,#{hasAutopay}
-			,#{etcInfo}
+			
 		)
 	</insert>
 	
+	<!-- 모든 회원 정보 -->
 	<select id="selectMember" resultType="member">
 		SELECT
-			*
+			id
+			,name
+			, telephone
+			, TO_CHAR(registeredDate, 'YYYY/MM/DD') as registeredDate
 		FROM
 			lc_members
 		ORDER BY
@@ -42,15 +44,45 @@
 	</select>
 	
 	<!-- 월별 회원 정보 -->
-	<select id="selectMemberByMonth" parameterType="int" resultType="member">
+	<select id="selectMemberByMonth" parameterType="HashMap" resultType="member">
 		select
-			num
+			id
 			,name
-			,phone
+			, telephone
+			, TO_CHAR(registeredDate, 'YYYY/MM/DD') as registeredDate
+			, registeredPlace
+			, hasTmoney
 		from
-			member
+			lc_members
+		WHERE
+			registeredDate
+			BETWEEN TO_DATE(#{firstDate},'YYYY/MM/DD')
+			AND TO_DATE(#{lastDate},'YYYY/MM/DD') 
 		order by
-			num
+			<choose>
+				<when test="_parameter.get('sorting') == 'name'">
+					name ASC
+				</when>
+				<when test="_parameter.get('sorting') == 'regiDate'">
+					registeredDate ASC
+				</when>
+			</choose>
 	</select>	
-
+	
+	<!-- 이름으로 고객 정보 검색 -->
+	<select id="searchMemberByName" parameterType="String" resultType="member">
+		SELECT
+			id
+			,name
+			, telephone
+			, TO_CHAR(registeredDate, 'YYYY/MM/DD') as registeredDate
+			, registeredPlace
+			, hasTmoney
+		FROM
+			lc_members
+		WHERE
+			name LIKE #{nameForSearch}
+		ORDER BY
+			registeredDate DESC
+	</select>
 </mapper>

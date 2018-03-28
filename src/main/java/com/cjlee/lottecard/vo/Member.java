@@ -7,13 +7,14 @@ public class Member {
 	String registeredDate;
 	String registeredPlace;
 	String issuedDate;
-	boolean hasTmoney;
-	boolean hasAutopay;
-	
+	char hasTmoney;
+	char hasAutopay;
+	String etcInfo;
+	int year;
 	public Member() {}
 	
 	public Member(int id, String name, String telephone, String registeredDate, String registeredPlace,
-			String issuedDate, boolean hasTmoney, boolean hasAutopay) {
+			String issuedDate, char hasTmoney, char hasAutopay, String etcInfo) {
 		this.id = id;
 		this.name = name;
 		this.telephone = telephone;
@@ -22,6 +23,7 @@ public class Member {
 		this.issuedDate = issuedDate;
 		this.hasTmoney = hasTmoney;
 		this.hasAutopay = hasAutopay;
+		this.etcInfo = etcInfo;
 	}
 	
 	public int getId() {
@@ -60,24 +62,30 @@ public class Member {
 	public void setIssuedDate(String issuedDate) {
 		this.issuedDate = issuedDate;
 	}
-	public boolean isHasTmoney() {
+	public char isHasTmoney() {
 		return hasTmoney;
 	}
-	public void setHasTmoney(boolean hasTmoney) {
+	public void setHasTmoney(char hasTmoney) {
 		this.hasTmoney = hasTmoney;
 	}
-	public boolean isHasAutopay() {
+	public char isHasAutopay() {
 		return hasAutopay;
 	}
-	public void setHasAutopay(boolean hasAutopay) {
+	public void setHasAutopay(char hasAutopay) {
 		this.hasAutopay = hasAutopay;
+	}
+	public String getEtcInfo() {
+		return etcInfo;
+	}
+	public void setEtcInfo(String etcInfo) {
+		this.etcInfo = etcInfo;
 	}
 
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", name=" + name + ", telephone=" + telephone + ", registeredDate=" + registeredDate
 				+ ", registeredPlace=" + registeredPlace + ", issuedDate=" + issuedDate + ", hasTmoney=" + hasTmoney
-				+ ", hasAutopay=" + hasAutopay + "]";
+				+ ", hasAutopay=" + hasAutopay + ", etcInfo=" + etcInfo + "]";
 	}
 	
 }

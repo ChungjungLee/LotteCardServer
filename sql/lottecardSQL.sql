@@ -15,17 +15,35 @@ CREATE TABLE lc_members(
 
 DROP SEQUENCE lc_members_SEQ;
 CREATE SEQUENCE lc_members_SEQ;
-
-DROP TABLE lc_utilrates;
-CREATE TABLE lc_utilrates(
-	id			NUMBER,
-	memberId	NUMBER,
-	year		NUMBER,
-	month		NUMBER,
-	isUsed		CHAR(1)	DEFAULT 'N',
-	CONSTRAINT lc_utilrates_PK		PRIMARY KEY(id),
-	CONSTRAINT lc_utilrates_FK		FOREIGN KEY(memberId)
-									REFERENCES lc_members(id) ON DELETE CASCADE,
-	CONSTRAINT lc_utilrate_month	CHECK (month BETWEEN 1 AND 12)
-);
-
+INSERT INTO lc_members
+	(id, name, telephone, registeredDate, registeredPlace, hasTmoney)
+VALUES 
+	(lc_members_SEQ.nextval, '고길동', '010-1111-1111', '2018/02/02', '롯데백화점', 'Y');
+INSERT INTO lc_members
+	(id, name, telephone, registeredDate, registeredPlace, hasTmoney)
+VALUES 
+	(lc_members_SEQ.nextval, '희동이', '010-2222-2222', '2018/02/10', '송파 이마트', 'N');
+INSERT INTO lc_members
+	(id, name, telephone, registeredDate, registeredPlace, hasTmoney)
+VALUES 
+	(lc_members_SEQ.nextval, '마이콜', '010-1234-5678', '2018/03/01', '잠실 롯데마트', 'Y');
+INSERT INTO lc_members
+	(id, name, telephone, registeredDate, registeredPlace, hasTmoney)
+VALUES 
+	(lc_members_SEQ.nextval, '홍길동', '010-8888-8888', '2018/03/01', '잠실 롯데마트', 'Y');
+INSERT INTO lc_members
+	(id, name, telephone, registeredDate, registeredPlace, hasTmoney)
+VALUES 
+	(lc_members_SEQ.nextval, '김철수', '010-9000-9001', '2018/03/07', '문정동 가든파이브', 'N');
+INSERT INTO lc_members
+	(id, name, telephone, registeredDate, registeredPlace, hasTmoney)
+VALUES 
+	(lc_members_SEQ.nextval, '김영희', '010-8309-1211', '2018/03/10', '서초구청', 'Y');
+INSERT INTO lc_members
+	(id, name, telephone, registeredDate, registeredPlace, hasTmoney)
+VALUES 
+	(lc_members_SEQ.nextval, '허균', '010-1210-1444', '2018/03/10', '서초구청', 'N');
+INSERT INTO lc_members
+	(id, name, telephone, registeredDate, registeredPlace, hasTmoney)
+VALUES 
+	(lc_members_SEQ.nextval, '임숙주', '010-8118-4089', '2018/03/10', '서초구청', 'Y');
